@@ -1,6 +1,7 @@
 .*
 !.gitignore
 _storage/*
+js/env.js
 node_modules/*
 package-lock.json
 vendor/*
