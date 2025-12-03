@@ -7,9 +7,13 @@ import {
 class SpriteSheetManager {
 	constructor( init ){
 
+		init = init || {}
+
 		this.textureLoader = new TextureLoader();
 
 		this.toon = init.toon || 'eric'
+
+		this.init_textures()
 
 	}
 
@@ -22,7 +26,7 @@ class SpriteSheetManager {
 			idle: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/idle.png'),
 			walking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/walking.png'),
 			jumping: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/jumping.png'),
-			kicking: this.textureLoader.load( env.PUB_ROOT = '/resource/toons/' + this.toon + '/kicking.png'),
+			kicking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/kicking.png'),
 			// kicking: this.textureLoader.load('https://placehold.co/128x256/ffff00/FFFFFF.png?text=kicking'),
 		}
 
