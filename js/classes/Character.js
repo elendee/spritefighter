@@ -17,6 +17,13 @@ class Character {
 		this.raycaster = new Raycaster();
 		this.character_width = this.sprite.width;
 		this.character_height = this.sprite.height;
+
+		this.widths = {
+			kicking: 2,
+			jumping: 2,
+			idle: 1,
+			walking: 1,
+		}
 	}
 
 	setState( state, direction ){
@@ -30,6 +37,7 @@ class Character {
 		if (state === 'jumping' && this.on_ground) {
 			this.velocity.y = this.jump_velocity;
 			this.on_ground = false;
+
 		}
 
 		if( state === 'walking' || (state === 'jumping' && direction) ){
@@ -37,6 +45,9 @@ class Character {
 		} else { // idle, kicking, or jumping without direction
 			this.velocity.x = 0;
 		}
+
+		this.sprite.width = this.widths[ state ]
+
 	}
 
 	update( delta ){

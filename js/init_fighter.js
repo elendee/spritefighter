@@ -63,8 +63,8 @@ function init() {
 		}
 	});
 
-	CAMERA.position.z = 5;
-	CAMERA.position.y = 1;
+	CAMERA.position.z = 3;
+	CAMERA.position.y = 2;
 
 	const clock = new Clock();
 
@@ -96,6 +96,7 @@ function init() {
 
 		// Update controls target and camera position AFTER player updates
 		controls.target.copy(player.sprite.sprite.position);
+		controls.target.y += 1
 		controls.update();
 		CAMERA.position.x = player.sprite.sprite.position.x;
 		
