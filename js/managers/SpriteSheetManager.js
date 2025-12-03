@@ -9,17 +9,24 @@ class SpriteSheetManager {
 
 		this.textureLoader = new TextureLoader();
 
+		this.toon = init.toon || 'eric'
+
+	}
+
+	init_textures(){
+		/*
+			run this after settin toon
+		*/
+
 		this.textures = {
-			idle: this.textureLoader.load( env.PUB_ROOT + '/resource/walker.png'),
-			// idle: this.textureLoader.load('https://placehold.co/128x256/ff0000/FFFFFF.png?text=idle'),
-			// walking: this.textureLoader.load('https://placehold.co/384x256/00ff00/FFFFFF.png?text=walking'),
-			walking: this.textureLoader.load( env.PUB_ROOT + '/resource/walker.png'),
-			jumping: this.textureLoader.load('https://placehold.co/128x256/0000ff/FFFFFF.png?text=jumping'),
-			kicking: this.textureLoader.load('https://placehold.co/128x256/ffff00/FFFFFF.png?text=kicking'),
+			idle: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/idle.png'),
+			walking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/walking.png'),
+			jumping: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/jumping.png'),
+			kicking: this.textureLoader.load( env.PUB_ROOT = '/resource/toons/' + this.toon + '/kicking.png'),
+			// kicking: this.textureLoader.load('https://placehold.co/128x256/ffff00/FFFFFF.png?text=kicking'),
 		}
 
 		this.materials = {
-			// idle: new SpriteMaterial({ map: this.textures.idle }),
 			idle: [
 				new SpriteMaterial({ map: this.textures.idle.clone(), }),
 				new SpriteMaterial({ map: this.textures.idle.clone(), }),
@@ -30,7 +37,11 @@ class SpriteSheetManager {
 				new SpriteMaterial({ map: this.textures.walking.clone(), }),
 				new SpriteMaterial({ map: this.textures.walking.clone(), }),
 			],
-			jumping: new SpriteMaterial({ map: this.textures.jumping }),
+			jumping: [
+				new SpriteMaterial({ map: this.textures.jumping.clone() }),
+				new SpriteMaterial({ map: this.textures.jumping.clone() }),
+				new SpriteMaterial({ map: this.textures.jumping.clone() }),
+			],
 			kicking: new SpriteMaterial({ map: this.textures.kicking }),
 		}
 
@@ -42,6 +53,11 @@ class SpriteSheetManager {
 		for( let i = 0; i < 3; i++ ){
 			this.materials.walking[i].map.offset.x = i / 3;
 			this.materials.walking[i].map.repeat.x = 1 / 3;
+		}
+
+		for( let i = 0; i < 3; i++ ){
+			this.materials.jumping[i].map.offset.x = i / 3;
+			this.materials.jumping[i].map.repeat.x = 1 / 3;
 		}
 
 	}

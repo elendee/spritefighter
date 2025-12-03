@@ -17,6 +17,10 @@ class Character {
 		this.sprite.setState( state, direction );
 		if( direction ){
 			this.direction = direction;
+			// console.log('SET!', {
+			// 	state,
+			// 	direction,
+			// })
 		}
 
 		if (state === 'jumping' && this.on_ground) {

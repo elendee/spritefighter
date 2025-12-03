@@ -14,9 +14,11 @@ class CharacterSprite {
 		this.sprite.scale.set(this.width, this.height, 1);
 		this.sprite.center.set(0.5, 0);
 
-		this.durations = {
+		this.durations = { // frames
 			walking: 100,
+			jumping: 400,
 			idle: 800,
+			kicking: 100,
 		}
 
 	}
@@ -31,23 +33,26 @@ class CharacterSprite {
 		this.sprite.material = SPRITE_SHEET_MANAGER.get_material( this.state, this.frame );
 	}
 
-	update( delta ){
-		const now = Date.now();
-		if( this.state === 'walking' || this.state === 'idle' ){
-			if( now - this.last_frame_update > this.durations[ this.state ] ){
-				this.frame = ( this.frame + 1 ) % 3;
-				this.sprite.material = SPRITE_SHEET_MANAGER.get_material( this.state, this.frame );
-				if( this.direction === 1 ){
-					this.sprite.material.map.offset.x = this.frame / 3;
-					this.sprite.material.map.repeat.x = 1 / 3;
-				} else {
-					this.sprite.material.map.offset.x = ( this.frame + 1 ) / 3;
-					this.sprite.material.map.repeat.x = -1 / 3;
+		update( delta ){
+			const now = Date.now();
+			
+			// 1. Update animation frame on a timer
+			if( this.state === 'walking' || this.state === 'idle' || this.state === 'jumping' || this.state === 'kicking' ){
+				if( now - this.last_frame_update > this.durations[ this.state ] ){
+					this.frame = ( this.frame + 1 ) % 3;
+					this.last_frame_update = now;
 				}
-				this.last_frame_update = now;
+			}
+
+			// 2. Set UVs based on current state (direction and frame) on EVERY frame
+			if( this.direction === 1 ){
+				this.sprite.material.map.repeat.x = 1 / 3;
+				this.sprite.material.map.offset.x = this.frame / 3;
+			} else { // direction === -1
+				this.sprite.material.map.repeat.x = -1 / 3;
+				this.sprite.material.map.offset.x = ( this.frame + 1 ) / 3;
 			}
 		}
-	}
 
 }
 

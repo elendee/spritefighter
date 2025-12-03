@@ -19,169 +19,208 @@ function init() {
 
 	window.player = player
 
-			const ground = new Ground();
+	const ground = new Ground();
 
-			window.ground = ground
+	window.ground = ground
 
-		
 
-			const KEYBOARD_STATE = {
 
-				left: false,
+	const KEYBOARD_STATE = {
 
-				right: false,
+		left: false,
 
-				jump: false,
+		right: false,
 
-				kick: false,
+		jump: false,
 
-			};
+		kick: false,
 
-		
+	};
 
-			document.addEventListener('keydown', (event) => {
 
-				switch (event.code) {
 
-					case 'ArrowLeft':
+	document.addEventListener('keydown', (event) => {
 
-						KEYBOARD_STATE.left = true;
+		switch (event.code) {
 
-						break;
+			case 'ArrowLeft':
 
-					case 'ArrowRight':
+				KEYBOARD_STATE.left = true;
 
-						KEYBOARD_STATE.right = true;
+				break;
 
-						break;
+			case 'ArrowRight':
 
-					case 'Space':
+				KEYBOARD_STATE.right = true;
 
-						KEYBOARD_STATE.jump = true;
+				break;
 
-						break;
+			case 'Space':
 
-					case 'KeyK':
+				KEYBOARD_STATE.jump = true;
 
-						KEYBOARD_STATE.kick = true;
+				break;
 
-						break;
+			case 'KeyK':
 
-				}
+				KEYBOARD_STATE.kick = true;
 
-			});
+				break;
 
-		
+		}
 
-			document.addEventListener('keyup', (event) => {
+	});
 
-				switch (event.code) {
 
-					case 'ArrowLeft':
 
-						KEYBOARD_STATE.left = false;
+	document.addEventListener('keyup', (event) => {
 
-						break;
+		switch (event.code) {
 
-					case 'ArrowRight':
+			case 'ArrowLeft':
 
-						KEYBOARD_STATE.right = false;
+				KEYBOARD_STATE.left = false;
 
-						break;
+				break;
 
-					case 'Space':
+			case 'ArrowRight':
 
-						KEYBOARD_STATE.jump = false;
+				KEYBOARD_STATE.right = false;
 
-						break;
+				break;
 
-					case 'KeyK':
+			case 'Space':
 
-						KEYBOARD_STATE.kick = false;
+				KEYBOARD_STATE.jump = false;
 
-						break;
+				break;
 
-				}
+			case 'KeyK':
 
-			});
+				KEYBOARD_STATE.kick = false;
 
-		
+				break;
 
-			CAMERA.position.z = 5;
+		}
 
-			CAMERA.position.y = 1;
+	});
 
-		
 
-			const clock = new Clock();
 
-		
+	CAMERA.position.z = 5;
 
-			function animate() {
+	CAMERA.position.y = 1;
 
-				const delta = clock.getDelta();
 
-				requestAnimationFrame(animate);
 
-		
+	const clock = new Clock();
 
-				// Determine player state from keyboard
 
-				if (KEYBOARD_STATE.jump) {
 
-					if (KEYBOARD_STATE.right) {
+	function animate() {
 
-						player.setState('jumping', 1);
+		const delta = clock.getDelta();
+
+		requestAnimationFrame(animate);
+
+
+
+					// Determine player state from keyboard
+
+
+
+					if (KEYBOARD_STATE.jump) {
+
+
+
+						if (KEYBOARD_STATE.right) {
+
+
+
+							player.setState('jumping', 1);
+
+
+
+						} else if (KEYBOARD_STATE.left) {
+
+
+
+							player.setState('jumping', -1);
+
+
+
+						} else {
+
+
+
+							player.setState('jumping', player.direction);
+
+
+
+						}
+
+
+
+					} else if (KEYBOARD_STATE.right) {
+
+
+
+						player.setState('walking', 1);
+
+
+						player.sprite.sprite.scale.x = -1
 
 					} else if (KEYBOARD_STATE.left) {
 
-						player.setState('jumping', -1);
+
+						player.sprite.sprite.scale.x = -1
+
+
+
+						player.setState('walking', -1);
+
+
+
+					} else if (KEYBOARD_STATE.kick) {
+
+
+
+						player.setState('kicking', player.direction);
+
+
 
 					} else {
 
-						player.setState('jumping');
+
+						player.direction = 0
+
+						player.setState('idle', player.direction);
+
+
 
 					}
 
-				} else if (KEYBOARD_STATE.right) {
 
-					player.setState('walking', 1);
 
-				} else if (KEYBOARD_STATE.left) {
+		player.update(delta);
 
-					player.setState('walking', -1);
 
-				} else if (KEYBOARD_STATE.kick) {
 
-					player.setState('kicking');
+		// Update controls target and camera position AFTER player updates
 
-				} else {
+		controls.target.copy(player.sprite.sprite.position);
 
-					player.setState('idle');
+		controls.update();
 
-				}
+		CAMERA.position.x = player.sprite.sprite.position.x;
 
 		
 
-				player.update(delta);
+		RENDERER.render(SCENE, CAMERA);
 
-		
+	}
 
-				// Update controls target and camera position AFTER player updates
-
-				controls.target.copy(player.sprite.sprite.position);
-
-				controls.update();
-
-				CAMERA.position.x = player.sprite.sprite.position.x;
-
-				
-
-				RENDERER.render(SCENE, CAMERA);
-
-			}
-
-			animate();
+	animate();
 }
 
 init();
