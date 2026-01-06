@@ -19,8 +19,8 @@ class Character {
 		this.character_height = this.sprite.height;
 
 		this.widths = {
-			kicking: 2,
-			jumping: 2,
+			kicking: 1.5,
+			jumping: 1.5,
 			idle: 1,
 			walking: 1,
 		}
@@ -47,6 +47,8 @@ class Character {
 		}
 
 		this.sprite.width = this.widths[ state ]
+		this.sprite.setSize()
+
 
 	}
 
