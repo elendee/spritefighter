@@ -3,7 +3,13 @@ import { Vector3, Raycaster } from 'three';
 
 class Character {
 	constructor( init ){
-		this.sprite = init.sprite || new CharacterSprite();
+
+		this.toon_name = init.toon_name
+
+		this.sprite = init.sprite || new CharacterSprite({
+			toon_name: init.toon_name || 'eric',
+			character: this,
+		});
 		init.scene.add( this.sprite.sprite );
 		this.collidables = init.collidables || [];
 
@@ -18,15 +24,10 @@ class Character {
 		this.character_width = this.sprite.width;
 		this.character_height = this.sprite.height;
 
-		this.widths = {
-			kicking: 1.5,
-			jumping: 1.5,
-			idle: 1,
-			walking: 1,
-		}
 	}
 
 	setState( state, direction ){
+
 		this.sprite.setState( state, direction );
 
 		// don't allow direction to be 0
@@ -37,18 +38,15 @@ class Character {
 		if (state === 'jumping' && this.on_ground) {
 			this.velocity.y = this.jump_velocity;
 			this.on_ground = false;
-
 		}
 
-		if( state === 'walking' || (state === 'jumping' && direction) ){
+		if( state === 'walking' ){
 			this.velocity.x = this.speed * this.direction;
-		} else { // idle, kicking, or jumping without direction
+		} else { // idle, kicking, or jumping
 			this.velocity.x = 0;
 		}
 
-		this.sprite.width = this.widths[ state ]
-		this.sprite.setSize()
-
+		this.state = state
 
 	}
 

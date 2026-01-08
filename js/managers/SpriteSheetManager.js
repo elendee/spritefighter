@@ -4,6 +4,9 @@ import {
 	TextureLoader,
 } from 'three';
 
+
+
+
 class SpriteSheetManager {
 	constructor( init ){
 
@@ -11,10 +14,36 @@ class SpriteSheetManager {
 
 		this.textureLoader = new TextureLoader();
 
-		this.toon = init.toon || 'eric'
+		this.toon_name = init.toon_name || 'eric'
+
+		this.sprite = init.sprite
 
 		this.init_textures()
 
+	}
+
+	set_frame_count( state ){
+		switch( state ){
+		case 'walking':
+			this.sprite.frame_count = 4
+			break;
+		case 'jumping':
+			this.sprite.frame_count = 4
+			break;
+		case 'kick_light':
+		case 'kick_medium':
+		case 'kick_heavy':
+		case 'punch_heavy':
+		case 'punch_light':
+		case 'idle':
+		case 'kicking':
+			this.sprite.frame_count = 4
+			break;
+		default:
+			console.warn('unknown set-frame-count', state )
+			this.sprite.frame_count = 4
+			break;
+		}
 	}
 
 	init_textures(){
@@ -23,58 +52,38 @@ class SpriteSheetManager {
 		*/
 
 		this.textures = {
-			idle: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/idle.png'),
-			walking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/walking.png'),
-			jumping: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/jumping.png'),
-			kicking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon + '/kicking.png'),
+			idle: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/idle.png'),
+			walking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/walking.png'),
+			jumping: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/jumping.png'),
+			punch_light: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/punch_light.png'),
+			punch_medium: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/punch_medium.png'),
+			punch_heavy: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/punch_heavy.png'),
+			kicking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/kicking.png'),
 			// kicking: this.textureLoader.load('https://placehold.co/128x256/ffff00/FFFFFF.png?text=kicking'),
 		}
 
 		this.materials = {
-			idle: [
-				new SpriteMaterial({ map: this.textures.idle.clone(), }),
-				new SpriteMaterial({ map: this.textures.idle.clone(), }),
-				new SpriteMaterial({ map: this.textures.idle.clone(), }),
-			],
-			walking: [
-				new SpriteMaterial({ map: this.textures.walking.clone(), }),
-				new SpriteMaterial({ map: this.textures.walking.clone(), }),
-				new SpriteMaterial({ map: this.textures.walking.clone(), }),
-			],
-			jumping: [
-				new SpriteMaterial({ map: this.textures.jumping.clone() }),
-				new SpriteMaterial({ map: this.textures.jumping.clone() }),
-				new SpriteMaterial({ map: this.textures.jumping.clone() }),
-			],
+			idle: new SpriteMaterial({ map: this.textures.idle }),
+			walking: new SpriteMaterial({ map: this.textures.walking }),
+			jumping: new SpriteMaterial({ map: this.textures.jumping }),
+			// punching: new SpriteMaterial({ map: this.textures.punching }),
+			punch_light: new SpriteMaterial({ map: this.textures.punch_light }),
+			punch_medium: new SpriteMaterial({ map: this.textures.punch_medium }),
+			punch_heavy: new SpriteMaterial({ map: this.textures.punch_heavy }),
 			kicking: new SpriteMaterial({ map: this.textures.kicking }),
-		}
-
-		for( let i = 0; i < 3; i++ ){
-			this.materials.idle[i].map.offset.x = i / 3;
-			this.materials.idle[i].map.repeat.x = 1 / 3;
-		}
-
-		for( let i = 0; i < 3; i++ ){
-			this.materials.walking[i].map.offset.x = i / 3;
-			this.materials.walking[i].map.repeat.x = 1 / 3;
-		}
-
-		for( let i = 0; i < 3; i++ ){
-			this.materials.jumping[i].map.offset.x = i / 3;
-			this.materials.jumping[i].map.repeat.x = 1 / 3;
 		}
 
 	}
 
 	get_material( state, frame ){
-		if( Array.isArray( this.materials[state] )){
-			return this.materials[state][frame] || this.materials.idle;
-		}
+
 		return this.materials[ state ] || this.materials.idle;
 	}
 
 }
 
-const SPRITE_SHEET_MANAGER = new SpriteSheetManager();
 
-export default SPRITE_SHEET_MANAGER;
+
+// const SPRITE_SHEET_MANAGER = new SpriteSheetManager();
+
+export default SpriteSheetManager

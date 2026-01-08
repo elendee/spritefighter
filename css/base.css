@@ -6,3 +6,116 @@ body {
 canvas {
 	display: block;
 }
+
+select.input{
+	padding: 5px;
+	font-size: 1.3rem;
+}
+
+.button{
+	padding: 5px 15px;
+	border: 1px solid;
+	cursor: pointer;
+	background: lightgrey;
+	border-radius: 4px;
+	display: inline-block;
+}
+
+#instructs,
+#reset{
+	position: fixed;
+	z-index: 99;
+	left: 10px;
+	bottom: 10px;
+}
+#instructs{
+	bottom: 50px;
+}
+
+#alert-contain{
+	position:fixed;
+	z-index: 999999;
+	bottom: 50px;
+	left: 0px;
+	text-align: right;
+	width: calc( 100% - 20px);
+	pointer-events: none;
+	padding-top: 10px;
+}
+.alert-wrap{
+	transition: .5s;
+}
+.alert-wrapper.float-alert{
+	position: fixed;
+	display: inline-block;
+}
+.alert-msg{
+	position: relative;
+	background: white;
+	background: rgb(40, 40, 40);
+	color: lightgrey;
+	font-size: 20px;
+	display: inline-block;
+	margin: 1px 0;
+	padding: 8px 40px 7px 20px;
+    pointer-events: initial;
+    font-weight: bold;
+	box-shadow: 0px 0px 5px black;
+	border-radius: 10px;
+}
+.alert-msg a{
+/* 	color: lightblue; */
+}
+.alert-msg pre{
+	max-height: 80vh;
+    overflow-y: auto;
+}
+.alert-msg span{
+	color: orange
+}
+
+.alert-icon, 
+.alert-close{
+	height: 100%;
+	width: 30px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.alert-icon{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 12px;
+	border-radius: 10px 0 0 10px;
+}
+
+.alert-close{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	pointer-events: initial;
+	cursor: pointer;
+	border-left: 1px solid grey;
+	padding: 2px 5px 0px 5px;
+	font-size: 1.5rem;
+	border-radius: 0 10px 10px 0;
+}
+.alert-close:hover{
+	background: rgba(250, 50, 55, .4);
+}
+.alert-icon{
+	background: lightgrey;
+}
+.alert-icon.type-success{
+	background: rgba(100, 245, 100, .7);
+}
+.alert-icon.type-error,
+.alert-icon.type-warning{
+	background: red;
+}
+.hal .alert-icon{
+	background: rgb(255 235 0)
+}
