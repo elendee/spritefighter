@@ -33,10 +33,10 @@ class SpriteSheetManager {
 		case 'kick_light':
 		case 'kick_medium':
 		case 'kick_heavy':
+		case 'kicking':
 		case 'punch_heavy':
 		case 'punch_light':
 		case 'idle':
-		case 'kicking':
 			this.sprite.frame_count = 4
 			break;
 		default:
@@ -59,6 +59,8 @@ class SpriteSheetManager {
 			punch_medium: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/punch_medium.png'),
 			punch_heavy: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/punch_heavy.png'),
 			kicking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/kicking.png'),
+			kick_medium: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/kick_medium.png'),
+			kick_heavy: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/kick_heavy.png'),
 			// kicking: this.textureLoader.load('https://placehold.co/128x256/ffff00/FFFFFF.png?text=kicking'),
 		}
 
@@ -71,6 +73,8 @@ class SpriteSheetManager {
 			punch_medium: new SpriteMaterial({ map: this.textures.punch_medium }),
 			punch_heavy: new SpriteMaterial({ map: this.textures.punch_heavy }),
 			kicking: new SpriteMaterial({ map: this.textures.kicking }),
+			kick_medium: new SpriteMaterial({ map: this.textures.kick_medium }),
+			kick_heavy: new SpriteMaterial({ map: this.textures.kick_heavy }),
 		}
 
 	}

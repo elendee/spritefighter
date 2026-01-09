@@ -186,6 +186,8 @@ function init() {
 	player.sprite.width = player.sprite.widths[ 'idle' ]
 	player.sprite.scaleToSize()
 
+	player.setState('idling', 1)
+
 }
 
 init();

@@ -6,18 +6,22 @@ import { Sprite } from 'three';
 
 const step_actions = [
 	'walking',
-	'kicking',
 	'idle',
 	'jumping',
 	// 'punching',
 	'punch_light',
 	'punch_medium',
-	'punch_heavy'
+	'punch_heavy',
+	// 'kick_light',
+	'kicking',
+	'kick_medium',
+	'kick_heavy'
 ]
 
 
 
 class CharacterSprite {
+
 	constructor( init ){
 		this.state = 'idle';
 		this.frame = 0;
@@ -43,8 +47,8 @@ class CharacterSprite {
 			punch_heavy: 200,
 			punching: 200,
 			kicking: 100,
-			kicking_medium: 200,
-			kicking_heavy: 300,
+			kick_medium: 200,
+			kick_heavy: 300,
 			jumping: 400,
 			idle: 800,
 			walking: 200,
@@ -54,9 +58,9 @@ class CharacterSprite {
 			punch_light: 1.25,
 			punch_medium: 1.25,
 			punch_heavy: 1.25,
-			kicking: 1.25,
-			kicking_medium: 1.5,
-			kicking_heavy: 1.75,
+			kicking: 1.5,
+			kick_medium: 1.75,
+			kick_heavy: 2,
 			jumping: .75,
 			idle: .75,
 			walking: .75,
@@ -85,7 +89,15 @@ class CharacterSprite {
 
 		this.SPRITE_SHEET_MANAGER.set_frame_count( this.state )
 
+		console.log('set-state', {
+			state,
+		})
+
 		this.width = this.widths[ state ] * this.height
+
+		this.character.character_width = this.sprite.width;
+		this.character.character_height = this.sprite.height;
+
 		this.scaleToSize()
 	}
 
