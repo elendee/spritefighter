@@ -119,3 +119,11 @@ select.input{
 .hal .alert-icon{
 	background: rgb(255 235 0)
 }
+
+.modal.choose-toon{
+	background: url('../resource/Title Screen 2.jpg');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: mintcream;
+	background-size: contain;
+}
