@@ -2,6 +2,7 @@ import env from '../env.js'
 import {
 	SpriteMaterial,
 	TextureLoader,
+	SRGBColorSpace,
 } from 'three';
 
 
@@ -51,6 +52,7 @@ class SpriteSheetManager {
 			run this after settin toon
 		*/
 
+
 		this.textures = {
 			idle: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/idle.png'),
 			walking: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/walking.png'),
@@ -62,6 +64,10 @@ class SpriteSheetManager {
 			kick_medium: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/kick_medium.png'),
 			kick_heavy: this.textureLoader.load( env.PUB_ROOT + '/resource/toons/' + this.toon_name + '/kick_heavy.png'),
 			// kicking: this.textureLoader.load('https://placehold.co/128x256/ffff00/FFFFFF.png?text=kicking'),
+		}
+
+		for( const key in this.textures ){
+			this.textures[key].colorSpace = SRGBColorSpace; // This is the most common fix!
 		}
 
 		this.materials = {
