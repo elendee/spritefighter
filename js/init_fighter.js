@@ -26,6 +26,15 @@ reset.addEventListener('click', () => {
 })
 document.body.append( reset )
 
+const full_reset = lib.b('div', 'full-reset', 'button')
+full_reset.innerText = 'full reset'
+full_reset.addEventListener('click', () => {
+	delete localStorage['first-load']
+	delete localStorage['toon-name']
+	location.reload()
+})
+document.body.append( full_reset )
+
 const instructs = lib.b('div', 'instructs', 'button')
 instructs.innerText = 'guide'
 instructs.addEventListener('click', () => {
@@ -52,6 +61,7 @@ document.body.append( instructs )
 
 
 const TOON_NAME = localStorage.getItem('toon-name')
+const RETURN_LOAD = localStorage.getItem('first-load')
 
 function init() {
 	const container = document.getElementById('spritefighter');
@@ -76,31 +86,57 @@ function init() {
 	SCENE.add( ambient_light );
 
 	if( !TOON_NAME ){
+
 		const modal = new Modal({
 			type: 'choose-toon',
 			header: 'choose your fighter'
 		})
 
-		const select = lib.b('select', false, 'input')
+		if( RETURN_LOAD ){
 
-		for( const key in TOONS ){
-			const data = TOONS[key]
-			const option = lib.b('option')
-			option.innerText = data.name
-			option.value = key
-			select.append( option )
+			const select = lib.b('select', false, 'input')
+
+			for( const key in TOONS ){
+				const data = TOONS[key]
+				const option = lib.b('option')
+				option.innerText = data.name
+				option.value = key
+				select.append( option )
+			}
+
+			modal.content.append( select )
+
+			const ok = lib.b('div', false, 'button')
+			ok.innerText = 'ok'
+			ok.addEventListener('click', () => {
+				localStorage.setItem('toon-name', select.value )
+				// modal.close.click()
+				location.reload()
+			})
+			modal.content.append( ok )
+
+			// document.body.append( modal.ele )
+		}else{
+
+			modal.ele.classList.add('is-fight')
+
+			// const first_load_bg = lib.b('div', false, 'first-load')
+			// first_load_bg.style.background = `url(/resource/Title Screen.jpg)`
+			// modal.content.append( first_load_bg )
+
+			// const switch_bg = lib.b('div', false, 'button')
+			// switch_bg.innerText = 'press start'
+			modal.ele.addEventListener('click', () => {
+				modal.ele.classList.remove('is-fight')
+				localStorage.setItem('first-load', Date.now() )
+				location.reload()
+			})
+
+			modal.content.remove()
+
+			// modal.content.append( switch_bg )
+
 		}
-
-		modal.content.append( select )
-
-		const ok = lib.b('div', false, 'button')
-		ok.innerText = 'ok'
-		ok.addEventListener('click', () => {
-			localStorage.setItem('toon-name', select.value )
-			// modal.close.click()
-			location.reload()
-		})
-		modal.content.append( ok )
 
 		document.body.append( modal.ele )
 		return;

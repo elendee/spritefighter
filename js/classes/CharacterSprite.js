@@ -89,9 +89,9 @@ class CharacterSprite {
 
 		this.SPRITE_SHEET_MANAGER.set_frame_count( this.state )
 
-		console.log('set-state', {
-			state,
-		})
+		// console.log('set-state', {
+		// 	state,
+		// })
 
 		this.width = this.widths[ state ] * this.height
 
