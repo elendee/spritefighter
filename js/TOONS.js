@@ -3,7 +3,7 @@ const TOONS = {
 		name: 'Eric',
 	},
 	ms_bliss: {
-		name: 'Soup Bliss',
+		name: 'Soul Bliss',
 	}
 }
 
