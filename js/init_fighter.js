@@ -94,13 +94,13 @@ function init() {
 	const ambient_light = new AmbientLight( 0xffffff, 0.1 ); // Soft white light, 50% intensity
 	SCENE.add( ambient_light );
 
-	audio.play()
-	.catch( err => {
-		// console.error( err )
-		window.addEventListener('click', play_shred )
-	})
-
 	if( !TOON_NAME ){
+
+		audio.play()
+		.catch( err => {
+			// console.error( err )
+			window.addEventListener('click', play_shred )
+		})
 
 		const modal = new Modal({
 			type: 'choose-toon',
