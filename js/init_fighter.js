@@ -66,8 +66,11 @@ const audio = new Audio( env.PUB_ROOT + '/resource/shred_acdc.mp3')
 const play_shred = () => {
 	audio.play()
 }
-
-
+audio.play()
+.catch( err => {
+	// console.error( err )
+	window.addEventListener('click', play_shred )
+})
 
 const TOON_NAME = localStorage.getItem('toon-name')
 const RETURN_LOAD = localStorage.getItem('first-load')
@@ -95,12 +98,6 @@ function init() {
 	SCENE.add( ambient_light );
 
 	if( !TOON_NAME ){
-
-		audio.play()
-		.catch( err => {
-			// console.error( err )
-			window.addEventListener('click', play_shred )
-		})
 
 		const modal = new Modal({
 			type: 'choose-toon',
