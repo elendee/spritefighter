@@ -1,3 +1,4 @@
+import env from './env.js'
 import * as lib from './lib.js'
 import CAMERA from './three/CAMERA.js'
 import SCENE from './three/SCENE.js'
@@ -60,6 +61,14 @@ document.body.append( instructs )
 
 
 
+
+const audio = new Audio( env.PUB_ROOT + '/resource/shred_acdc.mp3')
+const play_shred = () => {
+	audio.play()
+}
+
+
+
 const TOON_NAME = localStorage.getItem('toon-name')
 const RETURN_LOAD = localStorage.getItem('first-load')
 
@@ -84,6 +93,12 @@ function init() {
 	// Add an ambient light
 	const ambient_light = new AmbientLight( 0xffffff, 0.1 ); // Soft white light, 50% intensity
 	SCENE.add( ambient_light );
+
+	audio.play()
+	.catch( err => {
+		// console.error( err )
+		window.addEventListener('click', play_shred )
+	})
 
 	if( !TOON_NAME ){
 
@@ -225,5 +240,9 @@ function init() {
 	player.setState('idling', 1)
 
 }
+
+
+
+
 
 init();
