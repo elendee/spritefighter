@@ -63,6 +63,7 @@ document.body.append( instructs )
 
 
 const audio = new Audio( env.PUB_ROOT + '/resource/shred_acdc.mp3')
+audio.loop = true
 const play_shred = () => {
 	audio.play()
 }
