@@ -64,14 +64,18 @@ document.body.append( instructs )
 
 const audio = new Audio( env.PUB_ROOT + '/resource/shred_acdc.mp3')
 audio.loop = true
+let playing = false
 const play_shred = () => {
+	if( playing ) return;
 	audio.play()
+	playing = true
 }
-audio.play()
-.catch( err => {
+// audio.play()
+// .catch( err => {
 	// console.error( err )
-	window.addEventListener('click', play_shred )
-})
+window.addEventListener('click', play_shred )
+window.addEventListener('keyup', play_shred )
+// })
 
 const TOON_NAME = localStorage.getItem('toon-name')
 const RETURN_LOAD = localStorage.getItem('first-load')
@@ -106,6 +110,8 @@ function init() {
 		})
 
 		if( RETURN_LOAD ){
+
+			play_shred()
 
 			const select = lib.b('select', false, 'input')
 
