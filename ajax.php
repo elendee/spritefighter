@@ -261,7 +261,7 @@ switch ($action) {
 	default:
 		$response = [
 			'success' => false,
-			'msg' => 'unknown action: ' . $_POST['action']
+			'msg' => 'unknown action: ' . $action
 		];
 		break;
 
