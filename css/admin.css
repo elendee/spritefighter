@@ -2,7 +2,6 @@ img{
 	/*max-width: 100%;*/
 }
 .toon-row{
-	border: 1px solid;
 	position: relative;
 }
 .toon-frame{
@@ -10,7 +9,7 @@ img{
 	height: 200px;
 	display: inline-block;
 	vertical-align: top;
-	border: 1px solid;
+	border: 3px solid grey;
 	margin: 5px;
 	position: relative;
 }
@@ -34,4 +33,27 @@ img.frame-img{
 input.pw{
 	font-size: 1.5rem;
 	margin-bottom: 20px;
+}
+
+#big-action{
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: 10px;
+}
+
+.game-frame{
+	border: 3px solid green;
+}
+
+.toon-frame .rm{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.frame-dims{
+	position: absolute;
+	top: 0;
+	right: 50px;
 }

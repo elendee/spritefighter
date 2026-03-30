@@ -10,9 +10,10 @@ import { Clock, DirectionalLight, AmbientLight } from 'three';
 import {
 	Modal
 } from './Modal.js'
-import TOONS from './TOONS.js'
+import * as TOONS from './TOONS.js'
 import hal from './hal.js'
 import KEYBINDS from './KEYBINDS.js';
+
 
 
 
@@ -115,8 +116,8 @@ function init() {
 
 			const select = lib.b('select', false, 'input')
 
-			for( const key in TOONS ){
-				const data = TOONS[key]
+			for( const key in TOONS.data ){
+				const data = TOONS.data[key]
 				const option = lib.b('option')
 				option.innerText = data.name
 				option.value = key
@@ -249,4 +250,8 @@ function init() {
 
 
 
-init();
+
+TOONS.init()
+.then( res => {
+	init()
+})

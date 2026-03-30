@@ -1,0 +1,43 @@
+body {
+	overflow: hidden;
+}
+
+canvas {
+	display: block;
+}
+
+
+
+#instructs,
+#reset{
+	position: fixed;
+	z-index: 99;
+	left: 10px;
+	bottom: 10px;
+}
+#instructs{
+	bottom: 50px;
+}
+
+
+.modal.choose-toon{
+	background: url('../resource/Title Screen 2.jpg');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: mintcream;
+	background-size: contain;
+}
+
+.modal.choose-toon.is-fight{
+	background: url('../resource/Title Screen.jpg');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: mintcream;
+	background-size: contain;
+}
+
+#full-reset{
+	position: absolute;
+	bottom: 90px;
+	left: 10px;
+}
